@@ -20,8 +20,8 @@ import com.exilant.CommonUtils.Response;
 import com.exilant.CommonUtils.StatusCode;
 import com.exilant.CommonUtils.Utils;
 import com.exilant.controller.ProjectInfoController;
-import com.exilant.domain.ProjectInfoDomain;
 import com.exilant.model.ProjectInfoModel;
+import com.exilant.test.ProjectInfoDomain;
 
 @Repository
 @Transactional

@@ -12,10 +12,10 @@ import org.springframework.stereotype.Service;
 import com.exilant.CommonUtils.Response;
 import com.exilant.dao.ProjectInfoDao;
 import com.exilant.dao.RequirementDao;
-import com.exilant.domain.ProjectInfoDomain;
-import com.exilant.domain.RequirementDomain;
 import com.exilant.model.ProjectInfoModel;
 import com.exilant.model.RequirementModel;
+import com.exilant.test.ProjectInfoDomain;
+import com.exilant.test.RequirementDomain;
 
 @Service
 public class RequirementServiceImpl implements RequirementService {

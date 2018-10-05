@@ -9,7 +9,8 @@ import org.springframework.transaction.annotation.Transactional;
 import com.exilant.CommonUtils.Response;
 import com.exilant.CommonUtils.StatusCode;
 import com.exilant.CommonUtils.Utils;
-import com.exilant.domain.ExcelDataDomain;
+import com.exilant.domain.ProjectInfo;
+import com.exilant.test.ExcelDataDomain;
 
 @Repository
 @Transactional
@@ -21,12 +22,14 @@ public class ExcelDataDaoImpl implements ExcelDataDao{
 	org.slf4j.Logger log= LoggerFactory.getLogger(ExcelDataDaoImpl.class);
 
 	@Override
-	public Response readExcelData(ExcelDataDomain excelDataDomain) {
+	public Response readExcelData(ProjectInfo projectInfo) {
 		Response response=Utils.getResponseObject("Adding project Details");
 		try {
-		mongoTemplate.insert(excelDataDomain,"QutapData");
+			
+			System.out.println("db projectdata::::"+projectInfo.getProjectName());
+		mongoTemplate.insert(projectInfo,"projectInfo");
 		response.setStatus(StatusCode.SUCCESS.name());
-		response.setData(excelDataDomain);
+		response.setData(projectInfo);
 		return response;
 		}catch (Exception e) {
 			log.info(e.getMessage());

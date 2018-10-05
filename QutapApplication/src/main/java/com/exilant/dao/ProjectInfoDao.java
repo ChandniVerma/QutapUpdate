@@ -5,8 +5,8 @@ import java.util.List;
 import org.springframework.http.ResponseEntity;
 
 import com.exilant.CommonUtils.Response;
-import com.exilant.domain.ProjectInfoDomain;
 import com.exilant.model.ProjectInfoModel;
+import com.exilant.test.ProjectInfoDomain;
 
 public interface ProjectInfoDao {
 

@@ -1,4 +1,4 @@
-package com.exilant.domain;
+package com.exilant.test;
 
 
 

@@ -12,10 +12,10 @@ import org.springframework.stereotype.Service;
 import com.exilant.CommonUtils.Response;
 import com.exilant.dao.RequirementDao;
 import com.exilant.dao.TestScenarioDao;
-import com.exilant.domain.RequirementDomain;
-import com.exilant.domain.TestScenarioDomain;
 import com.exilant.model.RequirementModel;
 import com.exilant.model.TestScenarioModel;
+import com.exilant.test.RequirementDomain;
+import com.exilant.test.TestScenarioDomain;
 @Service
 public class TestScenarioServiceImpl  implements TestScenarioService{
 	org.slf4j.Logger log= LoggerFactory.getLogger(ProjectInfoServiceImpl.class);

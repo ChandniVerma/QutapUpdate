@@ -14,10 +14,10 @@ import org.springframework.stereotype.Service;
 import com.exilant.CommonUtils.Response;
 import com.exilant.controller.ProjectInfoController;
 import com.exilant.dao.ProjectInfoDao;
-import com.exilant.domain.ProjectInfoDomain;
-import com.exilant.domain.RequirementDomain;
 import com.exilant.model.ProjectInfoModel;
 import com.exilant.model.RequirementModel;
+import com.exilant.test.ProjectInfoDomain;
+import com.exilant.test.RequirementDomain;
 
 @Service
 public class ProjectInfoServiceImpl implements ProjectInfoService{

@@ -1,4 +1,4 @@
-package com.exilant.domain;
+package com.exilant.test;
 
 import javax.validation.constraints.NotEmpty;
 
@@ -16,6 +16,11 @@ public class ProjectInfoDomain {
 	@NotEmpty
 	private String moduleName;
 	private String description;
+	
+	 
+	
+	
+
 	public String getProjectId() {
 		return projectId;
 	}

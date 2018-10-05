@@ -34,6 +34,8 @@ org.slf4j.Logger log= LoggerFactory.getLogger(ExcelDataController.class);
 		log.info("url of the application"+req.getRequestURL().toString());
 		System.out.println("multipart"+multipartFile.isEmpty());
 		Response response=excelDataService.readExcelData(multipartFile);
+		
+		System.out.println("url:::::"+req.getRequestURL().toString());
 		response.setUrl(req.getRequestURL().toString());
 		return response;
 		

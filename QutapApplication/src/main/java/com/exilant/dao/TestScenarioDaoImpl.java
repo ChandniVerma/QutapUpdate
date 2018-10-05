@@ -10,8 +10,8 @@ import org.springframework.stereotype.Repository;
 import com.exilant.CommonUtils.Response;
 import com.exilant.CommonUtils.StatusCode;
 import com.exilant.CommonUtils.Utils;
-import com.exilant.domain.RequirementDomain;
-import com.exilant.domain.TestScenarioDomain;
+import com.exilant.test.RequirementDomain;
+import com.exilant.test.TestScenarioDomain;
 @Repository
 public class TestScenarioDaoImpl implements TestScenarioDao {
 
