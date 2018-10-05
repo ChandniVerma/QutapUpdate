@@ -82,7 +82,7 @@ public class ExcelDataServiceImpl implements ExcelDataService{
 	              //  ArrayList<TestCase> testCaseList=new ArrayList<TestCase>();
 	                System.out.println("no.of::::"+worksheet.getPhysicalNumberOfRows());
 	                
-	       	          for(int i=1;i<worksheet.getPhysicalNumberOfRows()-1;i++) {
+	       	          for(int i=1;i<worksheet.getPhysicalNumberOfRows();i++) {
 	       	        	  
 	       	        	System.out.println("no.of::i:value:"+i);
 	       	        	
@@ -146,16 +146,12 @@ public class ExcelDataServiceImpl implements ExcelDataService{
 	       	            modList.add(m1);
 	       	          }
 	       	            
-	       	       projectInf.setModuleList(modList);
-	       	       
+	       	             projectInf.setModuleList(modList);	     	 
+	      	              System.out.println("first column room::::::"+projectInf.getProjectName());      
+	      	              
+	      	            response= excelDataDao.readExcelData(projectInf);      
+	             }	       	     
 	       	      
-	       	              
-	       	              System.out.println("first column room::::::"+projectInf.getProjectName());
-	       	              
-	       	             
-	             }
-	       	          
-	       	       response= excelDataDao.readExcelData(projectInf);      
 	       	          
 	          }catch (Exception e) {
 				response.setMessage(e.getMessage());
