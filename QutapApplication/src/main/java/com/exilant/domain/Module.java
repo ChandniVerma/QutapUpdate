@@ -5,13 +5,13 @@ public class Module {
 
 	private String moduleId;
 	private String moduleName;
-	private Requirement requirement;
-	public Requirement getRequirement() {
-		return requirement;
-	}
-	public void setRequirement(Requirement requirement) {
-		this.requirement = requirement;
-	}
+//	private Requirement requirement;
+//	public Requirement getRequirement() {
+//		return requirement;
+//	}
+//	public void setRequirement(Requirement requirement) {
+//		this.requirement = requirement;
+//	}
 	public String getModuleId() {
 		return moduleId;
 	}

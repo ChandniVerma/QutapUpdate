@@ -2,6 +2,8 @@ package com.exilant.domain;
 
 import java.util.ArrayList;
 
+import org.springframework.data.mongodb.core.mapping.Document;
+
 public class TestScenario {
 
 	

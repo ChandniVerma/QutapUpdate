@@ -1,5 +1,7 @@
 package com.exilant.service;
 
+
+
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -25,7 +27,7 @@ import com.exilant.domain.TestScenario;
 
 
 @Service
-public class ExcelDataServiceImpl implements ExcelDataService{
+public class ExcelDataServiceImpl1 implements ExcelDataService{
 	
 	@Autowired
 	ExcelDataDao excelDataDao;
@@ -40,31 +42,7 @@ public class ExcelDataServiceImpl implements ExcelDataService{
 	             try {	          
 	            	 System.out.println("i am service::::::;"); 
 	            	 
-	            	 
-//	                DataTable table = ExcelTable.load(() -> path);
-//	                int rowCount = table.rowCount();
-//                    System.out.println("i am service::::::;"); 
-//	                
-//	                for(int i=0; i < rowCount; ++i) {
-//	                   DataRow row = table.row(i);     
-//	                   String projectId = row.cell("Project ID");
-//	                   String projectName=row.cell("Project Name");
-//	                   String moduleId = row.cell("Module ID");
-//	                   String moduleName = row.cell("Module Name");
-//	                   String description= row.cell("Description");
-//	                   
-//	                   ExcelDataDomain excelDataDomain=new ExcelDataDomain();
-//	                   excelDataDomain.setDescription(description);
-//	                   excelDataDomain.setModuleId(moduleId);
-//	                   excelDataDomain.setModuleName(moduleName);
-//	                  
-//	                   excelDataDomain.setProjectName(projectName);
-//	                   excelDataDomain.setProjectId(projectId);
-//	                   
-//	                  
-//	                   
-//	                  response=excelDataDao.readExcelData(excelDataDomain);      
-	            
+
 	            	 
 	            	 System.out.println("**********1**********");
 	            	 Workbook workbook = WorkbookFactory.create(multipartFile.getInputStream());
@@ -106,47 +84,12 @@ public class ExcelDataServiceImpl implements ExcelDataService{
 	       	              m1.setModuleId(formatter.formatCellValue(worksheet.getRow(i).getCell(3)));
 	       	              m1.setModuleName(formatter.formatCellValue(worksheet.getRow(i).getCell(4)));
 	       	              // modList.add(m1);
-	       	              
-	       	               if(formatter.formatCellValue(worksheet.getRow(i).getCell(5))!=null)
-	       	              { 
-	       	              Requirement r1=new Requirement();
-	       	              r1.setRequirementId(formatter.formatCellValue(worksheet.getRow(i).getCell(5)));
-	       	              r1.setRequirementName(formatter.formatCellValue(worksheet.getRow(i).getCell(6)));
-	       	              r1.setRequirementCases(formatter.formatCellValue(worksheet.getRow(i).getCell(7)));
-	       	              r1.setRequirDescri(formatter.formatCellValue(worksheet.getRow(i).getCell(8)));
-	       	              //requirList.add(r1);
-	       	                   m1.setRequirement(r1);
-	       	           if(formatter.formatCellValue(worksheet.getRow(i).getCell(9))!=null)
-	       	              {  TestScenario ts1=new TestScenario();
-	       	              
-	       	              ts1.setTestScenId(formatter.formatCellValue(worksheet.getRow(i).getCell(9)));
-	       	              ts1.setTestScenName(formatter.formatCellValue(worksheet.getRow(i).getCell(10)));
-	       	              ts1.setTestScenDesc(formatter.formatCellValue(worksheet.getRow(i).getCell(11)));
-	       	             // testSceList.add(ts1);
-	       	               r1.setTestSceList(ts1);
-	       	              if(formatter.formatCellValue(worksheet.getRow(i).getCell(12))!=null)
-       	                   {    TestCase t1=new TestCase();
-	       	             
-       	                    t1.setTestcaseId(formatter.formatCellValue(worksheet.getRow(i).getCell(12)));
-       	                    t1.setTestCaseDesc(formatter.formatCellValue(worksheet.getRow(i).getCell(13)));
-       	                    t1.setTestCaseCatgry(formatter.formatCellValue(worksheet.getRow(i).getCell(14)));
-       	                    t1.setTestCasePrity(formatter.formatCellValue(worksheet.getRow(i).getCell(15)));
-       	                   t1.setTestCaseTag(formatter.formatCellValue(worksheet.getRow(i).getCell(16)));
-       	                   t1.setTestCaseSteps(formatter.formatCellValue(worksheet.getRow(i).getCell(17)));
-       	                   t1.setTestCaseData(formatter.formatCellValue(worksheet.getRow(i).getCell(18)));
-       	                t1.setExpectedResult(formatter.formatCellValue(worksheet.getRow(i).getCell(19)));
-    	                  
-       	                  ts1.setTestCaseList(t1);
-       	                  
-	       	                 }
-	       	             
-	       	              }
-	       	       
-	       	            }
-	       	            modList.add(m1);
-	       	          }
+	       	               modList.add(m1);
+	       	               }
 	       	            
-	       	             projectInf.setModuleList(modList);	     	 
+	       	             projectInf.setModuleList(modList);	
+	       	             
+	       	            requiremnetMethod(worksheet,i);//get RequirementDetails
 	      	              System.out.println("first column room::::::"+projectInf.getProjectName());      
 	      	              
 	      	            response= excelDataDao.readExcelData(projectInf);      
@@ -162,6 +105,53 @@ public class ExcelDataServiceImpl implements ExcelDataService{
 		return response;	
 	}
 		
-}		
+	
+	public Response requiremnetMethod(Sheet worksheet,int i) {
 		
-
+	            	 
+		DataFormatter formatter = new DataFormatter();
+		
+		 if(formatter.formatCellValue(worksheet.getRow(i).getCell(5))!=null)
+            { 
+            Requirement r1=new Requirement();
+            r1.setRequirementId(formatter.formatCellValue(worksheet.getRow(i).getCell(5)));
+            r1.setRequirementName(formatter.formatCellValue(worksheet.getRow(i).getCell(6)));
+            r1.setRequirementCases(formatter.formatCellValue(worksheet.getRow(i).getCell(7)));
+            r1.setRequirDescri(formatter.formatCellValue(worksheet.getRow(i).getCell(8)));
+            //requirList.add(r1);
+             //    m1.setRequirement(r1);
+         if(formatter.formatCellValue(worksheet.getRow(i).getCell(9))!=null)
+            {  TestScenario ts1=new TestScenario();
+            
+            ts1.setTestScenId(formatter.formatCellValue(worksheet.getRow(i).getCell(9)));
+            ts1.setTestScenName(formatter.formatCellValue(worksheet.getRow(i).getCell(10)));
+            ts1.setTestScenDesc(formatter.formatCellValue(worksheet.getRow(i).getCell(11)));
+           // testSceList.add(ts1);
+             r1.setTestSceList(ts1);
+            if(formatter.formatCellValue(worksheet.getRow(i).getCell(12))!=null)
+             {    TestCase t1=new TestCase();
+           
+              t1.setTestcaseId(formatter.formatCellValue(worksheet.getRow(i).getCell(12)));
+              t1.setTestCaseDesc(formatter.formatCellValue(worksheet.getRow(i).getCell(13)));
+              t1.setTestCaseCatgry(formatter.formatCellValue(worksheet.getRow(i).getCell(14)));
+              t1.setTestCasePrity(formatter.formatCellValue(worksheet.getRow(i).getCell(15)));
+             t1.setTestCaseTag(formatter.formatCellValue(worksheet.getRow(i).getCell(16)));
+             t1.setTestCaseSteps(formatter.formatCellValue(worksheet.getRow(i).getCell(17)));
+             t1.setTestCaseData(formatter.formatCellValue(worksheet.getRow(i).getCell(18)));
+          t1.setExpectedResult(formatter.formatCellValue(worksheet.getRow(i).getCell(19)));
+         
+            ts1.setTestCaseList(t1);
+             }
+           }  
+         System.out.println("moduleID:::::"+formatter.formatCellValue(worksheet.getRow(i).getCell(9)));
+         r1.setModuleId(formatter.formatCellValue(worksheet.getRow(i).getCell(3)));
+         response= excelDataDao.requirementData(r1);
+          }
+		 
+		return response;
+	
+     }		
+	
+	
+   
+}

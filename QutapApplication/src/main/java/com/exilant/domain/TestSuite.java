@@ -1,30 +1,33 @@
 package com.exilant.domain;
 
+import java.util.ArrayList;
+
 import org.springframework.data.mongodb.core.mapping.Document;
 
 @Document(collection="TestSuite")
 public class TestSuite {
 
 	private String testSuiteName;
-	private Module moduleLis;
-	private TestCase testCase;
+	private String moduleId;
+	private ArrayList<TestCase> testCase;
 	public String getTestSuiteName() {
 		return testSuiteName;
 	}
 	public void setTestSuiteName(String testSuiteName) {
 		this.testSuiteName = testSuiteName;
 	}
-	public Module getModuleLis() {
-		return moduleLis;
+	public String getModuleId() {
+		return moduleId;
 	}
-	public void setModuleLis(Module moduleLis) {
-		this.moduleLis = moduleLis;
+	public void setModuleId(String moduleId) {
+		this.moduleId = moduleId;
 	}
-	public TestCase getTestCase() {
+	public ArrayList<TestCase> getTestCase() {
 		return testCase;
 	}
-	public void setTestCase(TestCase testCase) {
+	public void setTestCase(ArrayList<TestCase> testCase) {
 		this.testCase = testCase;
 	}
+
 	
 }
