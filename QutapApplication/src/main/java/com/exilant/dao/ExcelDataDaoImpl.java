@@ -67,7 +67,7 @@ public class ExcelDataDaoImpl implements ExcelDataDao{
 		try {
 			
 			System.out.println("db projectdata::::"+testSuite.getTestSuiteName());
-		mongoTemplate.insert(testSuite,"requirement");
+		mongoTemplate.insert(testSuite,"TestSuite");
 		response.setStatus(StatusCode.SUCCESS.name());
 		response.setData(testSuite);
 		return response;

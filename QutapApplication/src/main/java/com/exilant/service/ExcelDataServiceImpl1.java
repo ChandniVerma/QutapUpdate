@@ -22,6 +22,7 @@ import com.exilant.domain.ProjectInfo;
 import com.exilant.domain.Requirement;
 import com.exilant.domain.TestCase;
 import com.exilant.domain.TestScenario;
+import com.exilant.domain.TestSuite;
 
 
 
@@ -51,7 +52,9 @@ public class ExcelDataServiceImpl1 implements ExcelDataService{
 	                 
 	                 System.out.println("rows:::::"+worksheet.getPhysicalNumberOfRows());
 	                 
+	                 
 	                 ProjectInfo projectInf = new ProjectInfo();
+	                
 	                 //Module m1=new Module();
 	                 
 	                ArrayList<Module> modList=new ArrayList<Module>();
@@ -60,9 +63,12 @@ public class ExcelDataServiceImpl1 implements ExcelDataService{
 	              //  ArrayList<TestCase> testCaseList=new ArrayList<TestCase>();
 	                System.out.println("no.of::::"+worksheet.getPhysicalNumberOfRows());
 	                
+	               
+	                
 	       	          for(int i=1;i<worksheet.getPhysicalNumberOfRows();i++) {
 	       	        	  
-	       	        	System.out.println("no.of::i:value:"+i);
+	       	        	System.out.println("no.of============::i:value:"+i);
+	       	        	System.out.println("no.of cells========:::"+ worksheet.getRow(i).getPhysicalNumberOfCells());
 	       	        	
 	       	              Row row = worksheet.getRow(i);
 	       	              DataFormatter formatter = new DataFormatter();
@@ -74,9 +80,9 @@ public class ExcelDataServiceImpl1 implements ExcelDataService{
 	       	          if(!((formatter.formatCellValue(worksheet.getRow(i).getCell(0))).isEmpty()))
 	       	          {	       	             	       	             
 	       	        	  System.out.println("not empty row ::::"+formatter.formatCellValue(worksheet.getRow(i).getCell(0)));
-	       	             projectInf.setProjectId(formatter.formatCellValue(worksheet.getRow(i).getCell(0)));
-	       	            projectInf.setProjectName(formatter.formatCellValue(worksheet.getRow(i).getCell(1)));
-	       	         projectInf.setProjDescri(formatter.formatCellValue(worksheet.getRow(i).getCell(2)));
+	       	        	  	projectInf.setProjectId(formatter.formatCellValue(worksheet.getRow(i).getCell(0)));
+	       	             	projectInf.setProjectName(formatter.formatCellValue(worksheet.getRow(i).getCell(1)));
+	       	            	projectInf.setProjDescri(formatter.formatCellValue(worksheet.getRow(i).getCell(2)));
 	       	          }
 	       	              if(formatter.formatCellValue(worksheet.getRow(i).getCell(3))!=null)
 	       	              {
@@ -92,7 +98,10 @@ public class ExcelDataServiceImpl1 implements ExcelDataService{
 	       	            requiremnetMethod(worksheet,i);//get RequirementDetails
 	      	              System.out.println("first column room::::::"+projectInf.getProjectName());      
 	      	              
-	      	            response= excelDataDao.readExcelData(projectInf);      
+	      	            response= excelDataDao.readExcelData(projectInf);  
+	      	          System.out.println("object of tessuite::::123:::");
+	      	          testSuiteMethod(worksheet,i);
+	      	        System.out.println("object of tessuite::::321:::");
 	             }	       	     
 	       	      
 	       	          
@@ -107,6 +116,7 @@ public class ExcelDataServiceImpl1 implements ExcelDataService{
 		
 	
 	public Response requiremnetMethod(Sheet worksheet,int i) {
+		
 		
 	            	 
 		DataFormatter formatter = new DataFormatter();
@@ -145,13 +155,58 @@ public class ExcelDataServiceImpl1 implements ExcelDataService{
            }  
          System.out.println("moduleID:::::"+formatter.formatCellValue(worksheet.getRow(i).getCell(9)));
          r1.setModuleId(formatter.formatCellValue(worksheet.getRow(i).getCell(3)));
+         
          response= excelDataDao.requirementData(r1);
+         
+         
+         
           }
 		 
 		return response;
 	
      }		
+	public Response testSuiteMethod(Sheet worksheet,int i) {
+		
+		 TestSuite testSuite=new TestSuite();
+		 ArrayList<TestCase> testCaseList=new ArrayList<TestCase>();
+	            	 
+		DataFormatter formatter = new DataFormatter();
+		testSuite.setModuleId(formatter.formatCellValue(worksheet.getRow(i).getCell(3)));
+		
+        testSuite.setTestSuiteName(formatter.formatCellValue(worksheet.getRow(i).getCell(20)));
+        System.out.println("object of tessuite::name:::::"+formatter.formatCellValue(worksheet.getRow(i).getCell(20)));
+		
+        if(formatter.formatCellValue(worksheet.getRow(i).getCell(3))!=null)
+        {
+          
+           if(formatter.formatCellValue(worksheet.getRow(i).getCell(12))!=null)
+            {    TestCase t1=new TestCase();
+          
+             t1.setTestcaseId(formatter.formatCellValue(worksheet.getRow(i).getCell(12)));
+             t1.setTestCaseDesc(formatter.formatCellValue(worksheet.getRow(i).getCell(13)));
+             t1.setTestCaseCatgry(formatter.formatCellValue(worksheet.getRow(i).getCell(14)));
+             t1.setTestCasePrity(formatter.formatCellValue(worksheet.getRow(i).getCell(15)));
+            t1.setTestCaseTag(formatter.formatCellValue(worksheet.getRow(i).getCell(16)));
+            t1.setTestCaseSteps(formatter.formatCellValue(worksheet.getRow(i).getCell(17)));
+            t1.setTestCaseData(formatter.formatCellValue(worksheet.getRow(i).getCell(18)));
+         t1.setExpectedResult(formatter.formatCellValue(worksheet.getRow(i).getCell(19)));
+        
+         testCaseList.add(t1);
+            }
+           testSuite.setTestCase(testCaseList);
+           
+          }  
+       
+        
+        System.out.println("object of tessuite:::::::"+testSuite.getTestSuiteName());
+        
+        response=excelDataDao.testSuitData(testSuite);
+        
+        System.out.println("object of tessuite::::after:::");
+		 
+		return response;
 	
+    }		
 	
    
 }
